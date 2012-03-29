@@ -2,7 +2,6 @@ package mobi.daytoday.DayToDay;
 
 import java.text.ParseException;
 
-import mobi.ritf.DayToDay.R;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;

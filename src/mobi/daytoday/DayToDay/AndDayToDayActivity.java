@@ -2,8 +2,6 @@ package mobi.daytoday.DayToDay;
 
 import java.util.HashMap;
 
-import mobi.ritf.DayToDay.R;
-
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
