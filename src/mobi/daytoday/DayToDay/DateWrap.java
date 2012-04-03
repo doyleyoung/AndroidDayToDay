@@ -18,18 +18,17 @@ public class DateWrap {
   private static final int HOUR = 60 * MINUTE;
   private static final int DAY = 24 * HOUR;
   
-  public static String addToDate(String theDate, int value) throws ParseException {
-    DateFormat dateForm = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
+  public static String addToDate(String theDate, int numDays) throws ParseException {
+    DateFormat dateForm = new SimpleDateFormat("MM/dd/yyyy", Locale.getDefault());
     Date date = dateForm.parse(theDate);
-    GregorianCalendar cal = new GregorianCalendar(TimeZone.getTimeZone("EST"), Locale.US);
+    GregorianCalendar cal = new GregorianCalendar(TimeZone.getDefault(), Locale.getDefault());
     cal.setTime(date);
-    cal.add(Calendar.DATE, value);
-    return cal.get(Calendar.MONTH)+1 + "/" + cal.get(Calendar.DATE) + "/" + cal.get(Calendar.YEAR);
+    cal.add(Calendar.DATE, numDays);
+    return (cal.get(Calendar.MONTH) + 1) + "/" + cal.get(Calendar.DATE) + "/" + cal.get(Calendar.YEAR);
   }
   
-  // XXX 17+ days math is wrong... WTF 
   public static int daysBetween(String dateOne, String dateTwo) throws ParseException {
-    DateFormat dateForm = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
+    DateFormat dateForm = new SimpleDateFormat("MM/dd/yyyy", Locale.getDefault());
     Date firstDate = dateForm.parse(dateOne);
     Date secondDate = dateForm.parse(dateTwo);
     

@@ -89,7 +89,6 @@ public class BetweenDatesFragment extends SherlockFragment implements OnDateSetL
         Log.v(TAG, "numDays: " + numDays);
         
         boolean isWeeks;
-        Log.v(TAG, "class: " + daysWeeksSwitch.getClass());
         if(daysWeeksSwitch.getClass().equals(ToggleButton.class)) {
           isWeeks = ((ToggleButton)daysWeeksSwitch).isChecked();
         } else {
@@ -126,6 +125,9 @@ public class BetweenDatesFragment extends SherlockFragment implements OnDateSetL
     View v = inflater.inflate(R.layout.between_dates, container, false);
     
     firstDateText = (EditText)v.findViewById(R.id.first_date_input);
+    firstDateText.setFocusable(true);
+    firstDateText.requestFocus();
+    firstDateText.requestFocusFromTouch();
     secondDateText = (EditText)v.findViewById(R.id.second_date_input);
     daysWeeksSwitch = (Object)v.findViewById(R.id.days_weeks_switch);
     answer = (TextView)v.findViewById(R.id.between_dates_answer);

@@ -89,6 +89,9 @@ public class FromDateFragment extends SherlockFragment implements OnDateSetListe
     View v = inflater.inflate(R.layout.from_date, container, false);
     
     numDaysText = (EditText)v.findViewById(R.id.num_days_input);
+    numDaysText.setFocusable(true);
+    numDaysText.requestFocus();
+    numDaysText.requestFocusFromTouch();
     fromDateText = (EditText)v.findViewById(R.id.from_date_input);
     answer = (TextView)v.findViewById(R.id.from_date_answer);
     

@@ -15,13 +15,16 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 
 public class AndDayToDayActivity extends SherlockFragmentActivity {
   private static final String TAG = "AndDayToDayActivity";
+  private static final String LEFT_TAB = "left";
+  private static final String RIGHT_TAB = "right";
+  private static final String TAB_TAG = "tab";
+  
   TabHost mTabHost;
   TabManager mTabManager;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    getSupportActionBar().hide();
     setContentView(R.layout.fragment_tabs);
     
     mTabHost = (TabHost)findViewById(android.R.id.tabhost);
@@ -29,20 +32,21 @@ public class AndDayToDayActivity extends SherlockFragmentActivity {
 
     mTabManager = new TabManager(this, mTabHost, R.id.realtabcontent);
 
-    mTabManager.addTab(mTabHost.newTabSpec("left").setIndicator("From Date"),
+    mTabManager.addTab(mTabHost.newTabSpec(LEFT_TAB).setIndicator(getString(R.string.from_date_title)),
         FromDateFragment.class, null);
-    mTabManager.addTab(mTabHost.newTabSpec("right").setIndicator("Between Dates"),
+    
+    mTabManager.addTab(mTabHost.newTabSpec(RIGHT_TAB).setIndicator(getString(R.string.between_dates_title)),
         BetweenDatesFragment.class, null);
 
     if(savedInstanceState != null) {
-      mTabHost.setCurrentTabByTag(savedInstanceState.getString("tab"));
+      mTabHost.setCurrentTabByTag(savedInstanceState.getString(TAB_TAG));
     }
   }
 
   @Override
   protected void onSaveInstanceState(Bundle outState) {
     super.onSaveInstanceState(outState);
-    outState.putString("tab", mTabHost.getCurrentTabTag());
+    outState.putString(TAB_TAG, mTabHost.getCurrentTabTag());
   }
 
   /**
@@ -124,8 +128,7 @@ public class AndDayToDayActivity extends SherlockFragmentActivity {
       TabInfo newTab = mTabs.get(tabId);
       if (mLastTab != newTab) {
         FragmentTransaction ft = mActivity.getSupportFragmentManager().beginTransaction();
-        Log.v(TAG, "newTab: " + newTab.tag);
-        Log.v(TAG, "class: " + newTab.clss);
+
         if (mLastTab != null) {
           if (mLastTab.fragment != null) {
             ft.detach(mLastTab.fragment);
