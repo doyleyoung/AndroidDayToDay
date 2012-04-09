@@ -1,3 +1,18 @@
+/*
+* Copyright (C) 2012 Doyle Young
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+* http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*/
 package mobi.daytoday.DayToDay;
 
 import java.text.ParseException;
@@ -22,11 +37,17 @@ import android.widget.ToggleButton;
 
 import com.actionbarsherlock.app.SherlockFragment;
 
+/**
+ * Gather two dates and the form of the response (days or weeks) and report the 
+ * number of days or weeks between the dates
+ * @author Doyle Young
+ *
+ */
 public class BetweenDatesFragment extends SherlockFragment implements OnDateSetListener {
   private static final String TAG = "BetweenDatesFragment";
   
-  private EditText firstDateText;
-  private EditText secondDateText;
+  private EditText firstDateInput;
+  private EditText secondDateInput;
   private Object daysWeeksSwitch;
   private TextView answer;
   private ImageButton firstDateSelect;
@@ -36,7 +57,10 @@ public class BetweenDatesFragment extends SherlockFragment implements OnDateSetL
   private String secondDate;
   private boolean firstActive;
   private boolean secondActive;
-    
+  
+  /*
+   * Handles click on the first date select button
+   */
   private OnClickListener firstDateListener = new OnClickListener() {
     public void onClick(View v) {
       FragmentTransaction ft = getFragmentManager().beginTransaction();
@@ -53,7 +77,10 @@ public class BetweenDatesFragment extends SherlockFragment implements OnDateSetL
       frag.show(ft, DatePickerDialogFragment.DATE_PICKER_ID);
     }
   };
-  
+ 
+  /*
+   * Handles click on the second date select button
+   */
   private OnClickListener secondDateListener = new OnClickListener() {
     public void onClick(View v) {
       FragmentTransaction ft = getFragmentManager().beginTransaction();
@@ -71,13 +98,16 @@ public class BetweenDatesFragment extends SherlockFragment implements OnDateSetL
     }
   };
   
+  /*
+   * Handles click on the submit button
+   */
   private OnClickListener submitListener = new OnClickListener()
   {
     public void onClick(View v)
     {
       try {
-        firstDate = firstDateText.getText().toString();
-        secondDate = secondDateText.getText().toString();
+        firstDate = firstDateInput.getText().toString();
+        secondDate = secondDateInput.getText().toString();
         
         Log.v(TAG, firstDate + " " + secondDate);
                 
@@ -104,7 +134,6 @@ public class BetweenDatesFragment extends SherlockFragment implements OnDateSetL
         }
 
       } catch (ParseException e) {
-        // XXX invalid num days
         Log.v(TAG, "invalid date");
       }
       
@@ -119,16 +148,20 @@ public class BetweenDatesFragment extends SherlockFragment implements OnDateSetL
     secondActive = false;
   }
 
+  /**
+   * Create the view, set up our key objects and assign the listeners
+   */
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
     View v = inflater.inflate(R.layout.between_dates, container, false);
     
-    firstDateText = (EditText)v.findViewById(R.id.first_date_input);
-    firstDateText.setFocusable(true);
-    firstDateText.requestFocus();
-    firstDateText.requestFocusFromTouch();
-    secondDateText = (EditText)v.findViewById(R.id.second_date_input);
+    firstDateInput = (EditText)v.findViewById(R.id.first_date_input);
+    firstDateInput.setFocusable(true);
+    firstDateInput.requestFocus();
+    firstDateInput.requestFocusFromTouch();
+    
+    secondDateInput = (EditText)v.findViewById(R.id.second_date_input);
     daysWeeksSwitch = (Object)v.findViewById(R.id.days_weeks_switch);
     answer = (TextView)v.findViewById(R.id.between_dates_answer);
     
@@ -144,15 +177,18 @@ public class BetweenDatesFragment extends SherlockFragment implements OnDateSetL
     return v;
   }
 
+  /**
+   * Set the date based on the selected button
+   */
   @Override
   public void onDateSet(DatePicker view, int year, int month, int day) {
     getFragmentManager().popBackStack();
     if(firstActive) {
       firstActive = false;
-      firstDateText.setText(month+1 + "/" + day + "/" + year);
+      firstDateInput.setText(month+1 + "/" + day + "/" + year);
     } else if(secondActive) {
       secondActive = false;
-      secondDateText.setText(month+1 + "/" + day + "/" + year);
+      secondDateInput.setText(month+1 + "/" + day + "/" + year);
     }
   }
 }
