@@ -11,17 +11,12 @@
 
         <TextView
             android:id="@+id/first_date_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dip"
+            style="@style/text_label_land"
             android:text="@string/first_date" />
 
         <EditText
             android:id="@+id/first_date_input"
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dip"
-            android:layout_weight="1"
+            style="@style/input_land"
             android:inputType="date" >
 
             <requestFocus />
@@ -29,8 +24,7 @@
 
         <ImageButton
             android:id="@+id/first_date_select"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/date_select_land"
             android:src="@android:drawable/ic_menu_today" />
 
     </LinearLayout>
@@ -42,49 +36,31 @@
 
         <TextView
             android:id="@+id/second_date_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dip"
+            style="@style/text_label_land"
             android:text="@string/second_date" />
 
         <EditText
             android:id="@+id/second_date_input"
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dip"
-            android:layout_weight="1"
+            style="@style/input_land"
             android:inputType="date" />
 
         <ImageButton
             android:id="@+id/second_date_select"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/date_select_land"
             android:src="@android:drawable/ic_menu_today" />
 
     </LinearLayout>
 
     <Switch
         android:id="@+id/days_weeks_switch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dip"
-        android:text="@string/answer_in"
-        android:textOff="@string/days"
-        android:textOn="@string/weeks" />
+        style="@style/answer_in_switch" />
 
     <TextView
         android:id="@+id/between_dates_answer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:text=""
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        style="@style/answer" />
 
     <Button
         android:id="@+id/between_dates_button"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dip"
-        android:text="@string/submit" />
+        style="@style/button" />
 
 </LinearLayout>

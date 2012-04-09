@@ -6,10 +6,7 @@
 
     <TextView
         android:id="@+id/first_date_label"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dip"
-        android:gravity="center_horizontal"
+        style="@style/text_label"
         android:text="@string/first_date" />
 
     <LinearLayout
@@ -19,10 +16,7 @@
 
         <EditText
             android:id="@+id/first_date_input"
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dip"
-            android:layout_weight="0.8"
+            style="@style/input"
             android:inputType="date" >
 
             <requestFocus />
@@ -30,20 +24,14 @@
 
         <ImageButton
             android:id="@+id/first_date_select"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginTop="5dip"
-            android:layout_weight="0.2"
+            style="@style/date_select"
             android:src="@android:drawable/ic_menu_today" />
 
     </LinearLayout>
 
     <TextView
         android:id="@+id/second_date_label"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dip"
-        android:gravity="center_horizontal"
+        style="@style/text_label"
         android:text="@string/second_date" />
 
     <LinearLayout
@@ -53,18 +41,12 @@
 
         <EditText
             android:id="@+id/second_date_input"
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dip"
-            android:layout_weight="0.8"
+            style="@style/input"
             android:inputType="date" />
 
         <ImageButton
             android:id="@+id/second_date_select"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginTop="5dip"
-            android:layout_weight="0.2"
+            style="@style/date_select"
             android:src="@android:drawable/ic_menu_today" />
 
     </LinearLayout>
@@ -76,32 +58,20 @@
 
         <TextView
             android:id="@+id/answer_in_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/answer_in" />
+            style="@style/answer_label" />
 
         <ToggleButton
             android:id="@+id/days_weeks_switch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/answer_in"
-            android:textOff="@string/days"
-            android:textOn="@string/weeks" />
+            style="@style/toggle_button" />
+
     </LinearLayout>
 
     <TextView
         android:id="@+id/between_dates_answer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:text=""
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        style="@style/answer" />
 
     <Button
         android:id="@+id/between_dates_button"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dip"
-        android:text="@string/submit" />
+        style="@style/button" />
 
 </LinearLayout>

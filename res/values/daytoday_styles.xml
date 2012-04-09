@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="text_label">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">5dip</item>
+        <item name="android:gravity">center_horizontal</item>
+    </style>
+
+    <style name="text_label_land">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">5dip</item>
+    </style>
+
+    <style name="input">
+        <item name="android:layout_width">0dip</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">5dip</item>
+        <item name="android:layout_weight">0.8</item>
+    </style>
+
+    <style name="input_land">
+        <item name="android:layout_width">0dip</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">5dip</item>
+        <item name="android:layout_weight">0.8</item>
+    </style>
+
+    <style name="date_select">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_marginTop">5dip</item>
+        <item name="android:layout_weight">0.2</item>
+        <item name="android:contentDescription">@string/date_selector</item>
+    </style>
+
+    <style name="date_select_land">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_marginTop">5dip</item>
+        <item name="android:layout_weight">0.2</item>
+        <item name="android:contentDescription">@string/date_selector</item>
+    </style>
+
+    <style name="answer_label">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:text">@string/answer_in</item>
+    </style>
+    
+    <style name="toggle_button">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textOff">@string/days</item>
+        <item name="android:textOn">@string/weeks</item>
+    </style>
+    
+    <style name="answer_in_switch">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">5dip</item>
+        <item name="android:text">@string/answer_in</item>
+        <item name="android:textOff">@string/days</item>
+        <item name="android:textOn">@string/weeks</item>
+    </style>
+    
+    <style name="answer">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">5dip</item>
+        <item name="android:layout_marginBottom">5dip</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:text"></item>
+        <item name="android:textAppearance">?android:attr/textAppearanceLarge</item>
+    </style>
+
+    <style name="button">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">5dip</item>
+        <item name="android:text">@string/submit</item>
+    </style>
+
+</resources>

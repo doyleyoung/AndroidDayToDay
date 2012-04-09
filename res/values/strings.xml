@@ -11,4 +11,5 @@
   <string name="answer_in">Answer In</string>
   <string name="days">Days</string>
   <string name="weeks">Weeks</string>
+  <string name="date_selector">Calendar icon</string>
 </resources>

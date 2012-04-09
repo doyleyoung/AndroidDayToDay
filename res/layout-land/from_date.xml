@@ -11,17 +11,12 @@
 
         <TextView
             android:id="@+id/num_days_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dip"
+            style="@style/text_label_land"
             android:text="@string/num_days" />
 
         <EditText
             android:id="@+id/num_days_input"
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dip"
-            android:layout_weight="1"
+            style="@style/input_land"
             android:digits="-0123456789"
             android:inputType="number" >
 
@@ -36,40 +31,27 @@
 
         <TextView
             android:id="@+id/from_date_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dip"
+            style="@style/text_label_land"
             android:text="@string/from_date" />
 
         <EditText
             android:id="@+id/from_date_input"
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dip"
-            android:layout_weight="1"
+            style="@style/input_land"
             android:inputType="date" />
 
         <ImageButton
             android:id="@+id/from_date_select"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginTop="5dip"
+            style="@style/date_select_land"
             android:src="@android:drawable/ic_menu_today" />
+
     </LinearLayout>
 
     <TextView
         android:id="@+id/from_date_answer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:text=""
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        style="@style/answer" />
 
     <Button
         android:id="@+id/from_date_button"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dip"
-        android:text="@string/submit" />
+        style="@style/button" />
 
 </LinearLayout>
