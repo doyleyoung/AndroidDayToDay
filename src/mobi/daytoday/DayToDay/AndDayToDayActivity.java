@@ -22,9 +22,9 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.View;
 import android.widget.TabHost;
+import android.widget.TabHost.OnTabChangeListener;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 
@@ -63,7 +63,7 @@ public class AndDayToDayActivity extends SherlockFragmentActivity {
 
     if(savedInstanceState != null) {
       mTabHost.setCurrentTabByTag(savedInstanceState.getString(TAB_TAG));
-    }
+    } 
   }
 
   @Override
@@ -180,6 +180,7 @@ public class AndDayToDayActivity extends SherlockFragmentActivity {
         ft.commit();
         mActivity.getSupportFragmentManager().executePendingTransactions();
       }
+      mTabHost.clearFocus();
     }
   }
 }
