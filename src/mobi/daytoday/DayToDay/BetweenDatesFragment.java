@@ -52,6 +52,7 @@ public class BetweenDatesFragment extends SherlockFragment implements OnDateSetL
   private TextView answer;
   private ImageButton firstDateSelect;
   private ImageButton secondDateSelect;
+  private Button resetButton;
   private Button submitButton;
   private String firstDate;
   private String secondDate;
@@ -95,6 +96,19 @@ public class BetweenDatesFragment extends SherlockFragment implements OnDateSetL
       DialogFragment frag = new DatePickerDialogFragment(BetweenDatesFragment.this);
       secondActive = true;
       frag.show(ft, DatePickerDialogFragment.DATE_PICKER_ID);
+    }
+  };
+  
+  /*
+   * Handles click on the reset button
+   */
+  private OnClickListener resetListener = new OnClickListener()
+  {
+    public void onClick(View v)
+    {
+    	firstDateInput.setText("");
+    	secondDateInput.setText("");
+    	answer.setText("");
     }
   };
   
@@ -171,7 +185,10 @@ public class BetweenDatesFragment extends SherlockFragment implements OnDateSetL
     secondDateSelect = (ImageButton)v.findViewById(R.id.second_date_select);
     secondDateSelect.setOnClickListener(secondDateListener);
     
-    submitButton = (Button)v.findViewById(R.id.between_dates_button);
+    resetButton = (Button)v.findViewById(R.id.between_dates_reset_button);
+    resetButton.setOnClickListener(resetListener);
+    
+    submitButton = (Button)v.findViewById(R.id.between_dates_submit_button);
     submitButton.setOnClickListener(submitListener);
     
     return v;

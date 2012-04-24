@@ -48,6 +48,7 @@ public class FromDateFragment extends SherlockFragment implements OnDateSetListe
   private EditText fromDateText;
   private TextView answer;
   private ImageButton fromDateSelect;
+  private Button resetButton;
   private Button submitButton;
   private Integer numDays;
   private String fromDate;
@@ -64,6 +65,19 @@ public class FromDateFragment extends SherlockFragment implements OnDateSetListe
       
       DialogFragment frag = new DatePickerDialogFragment(FromDateFragment.this);
       frag.show(ft, DatePickerDialogFragment.DATE_PICKER_ID);
+    }
+  };
+  
+  /*
+   * Handles click on the reset button
+   */
+  private OnClickListener resetListener = new OnClickListener()
+  {
+    public void onClick(View v)
+    {
+    	fromDateText.setText("");
+    	numDaysText.setText("");
+    	answer.setText("");
     }
   };
   
@@ -119,7 +133,10 @@ public class FromDateFragment extends SherlockFragment implements OnDateSetListe
     fromDateSelect = (ImageButton)v.findViewById(R.id.from_date_select);
     fromDateSelect.setOnClickListener(firstDateListener);
     
-    submitButton = (Button)v.findViewById(R.id.from_date_button);
+    resetButton = (Button)v.findViewById(R.id.from_date_reset_button);
+    resetButton.setOnClickListener(resetListener);
+    
+    submitButton = (Button)v.findViewById(R.id.from_date_submit_button);
     submitButton.setOnClickListener(submitListener);
     
     return v;

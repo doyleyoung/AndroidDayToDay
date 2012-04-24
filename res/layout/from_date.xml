@@ -53,8 +53,20 @@
         android:id="@+id/from_date_answer"
         style="@style/answer" />
 
-    <Button
-        android:id="@+id/from_date_button"
-        style="@style/button" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/from_date_reset_button"
+            style="@style/button"
+            android:text="@string/reset" />
+
+        <Button
+            android:id="@+id/from_date_submit_button"
+            style="@style/button"
+            android:text="@string/submit" />
+
+    </LinearLayout>
 
 </LinearLayout>

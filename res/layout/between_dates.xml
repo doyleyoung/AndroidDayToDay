@@ -70,8 +70,20 @@
         android:id="@+id/between_dates_answer"
         style="@style/answer" />
 
-    <Button
-        android:id="@+id/between_dates_button"
-        style="@style/button" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/button1"
+            style="@style/button"
+            android:text="@string/reset" />
+
+        <Button
+            android:id="@+id/between_dates_button"
+            style="@style/button"
+            android:text="@string/submit" />
+
+    </LinearLayout>
 
 </LinearLayout>

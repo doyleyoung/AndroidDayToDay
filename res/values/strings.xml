@@ -3,6 +3,7 @@
   <string name="app_name">DayToDay</string>
   <string name="from_date_title">From Date</string>
   <string name="between_dates_title">Between Dates</string>
+  <string name="reset">Reset</string>
   <string name="submit">Submit</string>
   <string name="num_days">Number of Days</string>
   <string name="from_date">From Date(mm/dd/yyyy)</string>
