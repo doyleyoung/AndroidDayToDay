@@ -148,7 +148,10 @@ public class BetweenDatesFragment extends SherlockFragment implements OnDateSetL
         }
 
       } catch (ParseException e) {
-        Log.v(TAG, "invalid date");
+        // XXX need to split this up, killing both is not nice
+        ((AndDayToDayActivity)getActivity()).showAlert(getString(R.string.date_error));
+        firstDateInput.setText("");
+        secondDateInput.setText("");
       }
       
     }

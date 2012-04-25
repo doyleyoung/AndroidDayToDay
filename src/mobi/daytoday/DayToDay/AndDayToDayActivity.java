@@ -22,10 +22,11 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.View;
 import android.widget.TabHost;
-import android.widget.TabHost.OnTabChangeListener;
 
+import com.actionbarsherlock.app.SherlockDialogFragment;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 
 /**
@@ -38,6 +39,7 @@ public class AndDayToDayActivity extends SherlockFragmentActivity {
   private static final String LEFT_TAB = "left";
   private static final String RIGHT_TAB = "right";
   private static final String TAB_TAG = "tab";
+  private static final String ALERT_TAG = "alert";
   
   TabHost mTabHost;
   TabManager mTabManager;
@@ -72,6 +74,11 @@ public class AndDayToDayActivity extends SherlockFragmentActivity {
     outState.putString(TAB_TAG, mTabHost.getCurrentTabTag());
   }
 
+  public void showAlert(String alertText) {
+    AlertDialogFragment alert = AlertDialogFragment.newInstance(alertText);
+    alert.show(getSupportFragmentManager(), ALERT_TAG);
+  }
+  
   /**
    * This is a helper class that implements a generic mechanism for
    * associating fragments with the tabs in a tab host.  It relies on a

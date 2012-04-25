@@ -79,7 +79,7 @@
             android:text="@string/reset" />
 
         <Button
-            android:id="@+id/between_dates_button"
+            android:id="@+id/between_dates_submit_button"
             style="@style/button"
             android:text="@string/submit" />
 

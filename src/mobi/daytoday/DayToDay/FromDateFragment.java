@@ -99,12 +99,14 @@ public class FromDateFragment extends SherlockFragment implements OnDateSetListe
         
         answer.setText(DateWrap.addToDate(fromDate, numDays));
       } catch(NumberFormatException e) {
-        // XXX invalid num days
-        Log.v(TAG, "invalid num days");
+
+        ((AndDayToDayActivity)getActivity()).showAlert(getString(R.string.date_error));
+        fromDateText.setText("");
       
       } catch (ParseException e) {
-        // XXX invalid num days
-        Log.v(TAG, "invalid date");
+
+        ((AndDayToDayActivity)getActivity()).showAlert(getString(R.string.date_error));
+        fromDateText.setText("");
       }
 
     }

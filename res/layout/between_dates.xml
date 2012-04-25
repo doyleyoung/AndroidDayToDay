@@ -75,12 +75,12 @@
         android:layout_height="wrap_content" >
 
         <Button
-            android:id="@+id/button1"
+            android:id="@+id/between_dates_reset_button"
             style="@style/button"
             android:text="@string/reset" />
 
         <Button
-            android:id="@+id/between_dates_button"
+            android:id="@+id/between_dates_submit_button"
             style="@style/button"
             android:text="@string/submit" />
 
