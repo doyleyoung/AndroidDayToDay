@@ -1,78 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
 
     <LinearLayout
-        android:id="@+id/first_date"
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:id="@+id/first_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/first_date_label"
+                style="@style/text_label_land"
+                android:text="@string/first_date" />
+
+            <EditText
+                android:id="@+id/first_date_input"
+                style="@style/input_land"
+                android:inputType="date" >
+
+                <requestFocus />
+            </EditText>
+
+            <ImageButton
+                android:id="@+id/first_date_select"
+                style="@style/date_select_land"
+                android:src="@android:drawable/ic_menu_today" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/second_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/second_date_label"
+                style="@style/text_label_land"
+                android:text="@string/second_date" />
+
+            <EditText
+                android:id="@+id/second_date_input"
+                style="@style/input_land"
+                android:inputType="date" />
+
+            <ImageButton
+                android:id="@+id/second_date_select"
+                style="@style/date_select_land"
+                android:src="@android:drawable/ic_menu_today" />
+        </LinearLayout>
+
+        <Switch
+            android:id="@+id/days_weeks_switch"
+            style="@style/answer_in_switch" />
 
         <TextView
-            android:id="@+id/first_date_label"
-            style="@style/text_label_land"
-            android:text="@string/first_date" />
+            android:id="@+id/between_dates_answer"
+            style="@style/answer" />
 
-        <EditText
-            android:id="@+id/first_date_input"
-            style="@style/input_land"
-            android:inputType="date" >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
 
-            <requestFocus />
-        </EditText>
+            <Button
+                android:id="@+id/between_dates_reset_button"
+                style="@style/button"
+                android:text="@string/reset" />
 
-        <ImageButton
-            android:id="@+id/first_date_select"
-            style="@style/date_select_land"
-            android:src="@android:drawable/ic_menu_today" />
-
+            <Button
+                android:id="@+id/between_dates_submit_button"
+                style="@style/button"
+                android:text="@string/submit" />
+        </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/second_date"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-        <TextView
-            android:id="@+id/second_date_label"
-            style="@style/text_label_land"
-            android:text="@string/second_date" />
-
-        <EditText
-            android:id="@+id/second_date_input"
-            style="@style/input_land"
-            android:inputType="date" />
-
-        <ImageButton
-            android:id="@+id/second_date_select"
-            style="@style/date_select_land"
-            android:src="@android:drawable/ic_menu_today" />
-
-    </LinearLayout>
-
-    <Switch
-        android:id="@+id/days_weeks_switch"
-        style="@style/answer_in_switch" />
-
-    <TextView
-        android:id="@+id/between_dates_answer"
-        style="@style/answer" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-        <Button
-            android:id="@+id/between_dates_reset_button"
-            style="@style/button"
-            android:text="@string/reset" />
-
-        <Button
-            android:id="@+id/between_dates_submit_button"
-            style="@style/button"
-            android:text="@string/submit" />
-
-    </LinearLayout>
-
-</LinearLayout>
+</ScrollView>

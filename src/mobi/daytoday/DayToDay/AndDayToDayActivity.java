@@ -22,11 +22,9 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.View;
 import android.widget.TabHost;
 
-import com.actionbarsherlock.app.SherlockDialogFragment;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 
 /**
@@ -35,7 +33,7 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
  *
  */
 public class AndDayToDayActivity extends SherlockFragmentActivity {
-  private static final String TAG = "AndDayToDayActivity";
+//  private static final String TAG = "AndDayToDayActivity";
   private static final String LEFT_TAB = "left";
   private static final String RIGHT_TAB = "right";
   private static final String TAB_TAG = "tab";
