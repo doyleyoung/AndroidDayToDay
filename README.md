@@ -1,7 +1,9 @@
 Android DayToDay
 ================
 
-A Multiplatform date math web and mobile app
+An Android date math app that allows you to easily:
+* Add and subtract days from a date
+* Determine number of days or weeks between dates
 
 Overview
 --------
