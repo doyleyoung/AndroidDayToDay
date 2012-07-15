@@ -18,9 +18,10 @@ Usage
 -----
 
 This repo contains an importable Eclipse Android project.  Instructions to set
-up Eclipse Android development are available [here].  You will also need to
-include [ActionBarSherlock] as a library dependency.  Jake Wharton has excellent
-instructions on this process at that link.  Once you have imported the project
+up Eclipse Android development are available [here].  You need to include
+[ActionBarSherlock] as a library dependency.  Jake Wharton has excellent
+instructions on this process at that link.  You will also need to include
+[Joda Time] as a dependency.  Once you have imported the project
 and included the library, a Project -> Clean is usually all that is necessary.
 If you have any further questions, please let me know.
 
@@ -45,5 +46,6 @@ License
     See the License for the specific language governing permissions and
     limitations under the License.
 
+[Joda Time]: http://joda-time.sourceforge.net/
 [ActionBarSherlock]: https://github.com/JakeWharton/ActionBarSherlock
 [here]: http://developer.android.com/sdk/index.html
