@@ -60,9 +60,13 @@
             android:id="@+id/answer_in_label"
             style="@style/answer_label" />
 
-        <ToggleButton
-            android:id="@+id/days_weeks_switch"
-            style="@style/toggle_button" />
+        <Spinner
+            android:id="@+id/answer_in_spinner"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:entries="@array/answer_in_array"
+            android:prompt="@string/answer_in_prompt"/>
 
     </LinearLayout>
 

@@ -26,7 +26,6 @@
             android:id="@+id/first_date_select"
             style="@style/date_select"
             android:src="@android:drawable/ic_menu_today" />
-
     </LinearLayout>
 
     <TextView
@@ -48,12 +47,25 @@
             android:id="@+id/second_date_select"
             style="@style/date_select"
             android:src="@android:drawable/ic_menu_today" />
-
     </LinearLayout>
 
-    <Switch
-        android:id="@+id/days_weeks_switch"
-        style="@style/answer_in_switch" />
+    <LinearLayout
+        android:id="@+id/answer_in"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/answer_in_label"
+            style="@style/answer_label" />
+
+        <Spinner
+            android:id="@+id/answer_in_spinner"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:entries="@array/answer_in_array"
+            android:prompt="@string/answer_in_prompt" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/between_dates_answer"
@@ -72,9 +84,8 @@
         <Button
             android:id="@+id/between_dates_submit_button"
             style="@style/button"
-            android:layout_width="wrap_content" 
+            android:layout_width="wrap_content"
             android:text="@string/submit" />
-
     </LinearLayout>
 
 </LinearLayout>

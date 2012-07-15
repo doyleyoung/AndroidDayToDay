@@ -10,5 +10,6 @@
 			<attribute name="javadoc_location" value="file:/home/doby/android-sdk-linux_x86/docs/reference"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="libs/joda-time-2.1.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

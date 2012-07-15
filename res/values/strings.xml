@@ -1,21 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name">DayToDay</string>
-  
-  <string name="from_date_title">From Date</string>
-  <string name="between_dates_title">Between Dates</string>
-  
-  <string name="reset">Reset</string>
-  <string name="submit">Submit</string>
-  <string name="num_days">Number of Days</string>
-  <string name="from_date">From Date(mm/dd/yyyy)</string>
-  <string name="first_date">First Date(mm/dd/yyyy)</string>
-  <string name="second_date">Second Date(mm/dd/yyyy)</string>
-  <string name="answer_in">Answer In</string>
-  <string name="days">Days</string>
-  <string name="weeks">Weeks</string>
-  
-  <string name="date_error">Invalid Date</string>
-  
-  <string name="date_selector">Calendar icon</string>
+
+    <string name="app_name">DayToDay</string>
+    <string name="from_date_title">From Date</string>
+    <string name="between_dates_title">Between Dates</string>
+    <string name="reset">Reset</string>
+    <string name="submit">Submit</string>
+    <string name="num_days">Number of Days</string>
+    <string name="from_date">From Date(mm/dd/yyyy)</string>
+    <string name="first_date">First Date(mm/dd/yyyy)</string>
+    <string name="second_date">Second Date(mm/dd/yyyy)</string>
+    <string name="answer_in">Answer In</string>
+    <string name="days">Days</string>
+    <string name="weeks">Weeks</string>
+    <string name="date_error">Invalid Date</string>
+    <string name="date_selector">Calendar icon</string>
+
+    <string name="answer_in_prompt">Select answer type</string>
+    <string-array name="answer_in_array">
+        <item>Days</item>
+        <item>Weeks</item>
+        <item>Months</item>
+        <item>Natural Language</item>
+<!--         <item>Age</item> -->
+    </string-array>
+
 </resources>
