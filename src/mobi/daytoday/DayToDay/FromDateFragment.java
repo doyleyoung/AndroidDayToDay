@@ -23,6 +23,7 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -32,6 +33,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.TextView.OnEditorActionListener;
 
 import com.actionbarsherlock.app.SherlockFragment;
 
@@ -49,7 +51,6 @@ public class FromDateFragment extends SherlockFragment implements OnDateSetListe
   private TextView answer;
   private ImageButton fromDateSelect;
   private Button resetButton;
-  private Button submitButton;
   private Integer numDays;
   private String fromDate;
   
@@ -64,6 +65,9 @@ public class FromDateFragment extends SherlockFragment implements OnDateSetListe
       ft.addToBackStack(null);
       
       DialogFragment frag = new DatePickerDialogFragment(FromDateFragment.this);
+      Bundle args = new Bundle();
+      args.putString(DateWrap.CUR_DATE, fromDateText.getText().toString());
+      frag.setArguments(args);
       frag.show(ft, DatePickerDialogFragment.DATE_PICKER_ID);
     }
   };
@@ -81,34 +85,11 @@ public class FromDateFragment extends SherlockFragment implements OnDateSetListe
     }
   };
   
-  private OnClickListener submitListener = new OnClickListener()
-  {
-    public void onClick(View v)
-    {
-      // XXX test month, day and year for sane values java lets them be anything 58/58/2012
-//    String[] date = fromDate.split("/");
-//    Log.v(TAG, "date: " + date[0] + " " + date[1] + " " + date[2]);
-//    GregorianCalendar cal = new GregorianCalendar(Integer.valueOf(date[2]),
-//        Integer.valueOf(date[0]),
-//        Integer.valueOf(date[1]));
-      
-      try {
-        numDays = Integer.valueOf(numDaysText.getText().toString());
-        fromDate = fromDateText.getText().toString();
-        Log.v(TAG, numDays + " " + fromDate);
-        
-        answer.setText(DateWrap.addToDate(fromDate, numDays));
-      } catch(NumberFormatException e) {
-
-        ((AndDayToDayActivity)getActivity()).showAlert(getString(R.string.date_error));
-        fromDateText.setText("");
-      
-      } catch (ParseException e) {
-
-        ((AndDayToDayActivity)getActivity()).showAlert(getString(R.string.date_error));
-        fromDateText.setText("");
-      }
-
+  private OnEditorActionListener dateEditListener = new OnEditorActionListener() {
+    @Override
+    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+      calculateDate();
+      return false;
     }
   };
 
@@ -129,7 +110,11 @@ public class FromDateFragment extends SherlockFragment implements OnDateSetListe
     numDaysText.setFocusable(true);
     numDaysText.requestFocus();
     numDaysText.requestFocusFromTouch();
+    numDaysText.setOnEditorActionListener(dateEditListener);
+    
     fromDateText = (EditText)v.findViewById(R.id.from_date_input);
+    fromDateText.setOnEditorActionListener(dateEditListener);
+    
     answer = (TextView)v.findViewById(R.id.from_date_answer);
     
     fromDateSelect = (ImageButton)v.findViewById(R.id.from_date_select);
@@ -138,16 +123,39 @@ public class FromDateFragment extends SherlockFragment implements OnDateSetListe
     resetButton = (Button)v.findViewById(R.id.from_date_reset_button);
     resetButton.setOnClickListener(resetListener);
     
-    submitButton = (Button)v.findViewById(R.id.from_date_submit_button);
-    submitButton.setOnClickListener(submitListener);
-    
     return v;
   }
 
   @Override
   public void onDateSet(DatePicker view, int year, int month, int day) {
     getFragmentManager().popBackStack();
-    fromDateText.setText(month+1 + "/" + day + "/" + year);    
+    fromDateText.setText(String.format(getString(R.string.date_format), month + 1, day, year));
+    calculateDate();
   }
 
+  private void calculateDate() {
+    // XXX test month, day and year for sane values java lets them be anything 58/58/2012
+//  String[] date = fromDate.split("/");
+//  Log.v(TAG, "date: " + date[0] + " " + date[1] + " " + date[2]);
+//  GregorianCalendar cal = new GregorianCalendar(Integer.valueOf(date[2]),
+//      Integer.valueOf(date[0]),
+//      Integer.valueOf(date[1]));
+    
+    try {
+      numDays = Integer.valueOf(numDaysText.getText().toString());
+      fromDate = fromDateText.getText().toString();
+      Log.v(TAG, numDays + " " + fromDate);
+      
+      answer.setText(DateWrap.addToDate(fromDate, numDays));
+    } catch(NumberFormatException e) {
+      
+      ((AndDayToDayActivity)getActivity()).showAlert(getString(R.string.date_error));
+      fromDateText.setText("");
+      
+    } catch (ParseException e) {
+      
+      ((AndDayToDayActivity)getActivity()).showAlert(getString(R.string.date_error));
+      fromDateText.setText("");
+    }
+  }
 }

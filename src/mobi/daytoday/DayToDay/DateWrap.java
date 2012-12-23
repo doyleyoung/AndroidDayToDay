@@ -31,8 +31,6 @@ import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.PeriodFormatter;
 import org.joda.time.format.PeriodFormatterBuilder;
 
-import android.util.Log;
-
 /**
  * Date math functions
  * 
@@ -40,8 +38,8 @@ import android.util.Log;
  * 
  */
 public class DateWrap {
-
-  private static final String TAG = "DateWrap";
+  public static final String DATE_FORMAT = "MM-dd-yyyy";
+  public static final String CUR_DATE = "curDate";
 
   // constants for millisecond time calculation
   private static final int SECOND = 1000;
@@ -49,18 +47,16 @@ public class DateWrap {
   private static final int HOUR = 60 * MINUTE;
   private static final int DAY = 24 * HOUR;
 
-  private static final String STR_DAY = "day";
-  private static final String STR_WEEK = "week";
-  private static final String STR_MONTH = "month";
-  private static final String STR_YEAR = "year";
-
-  public static final String DATE_FORMAT = "MM/dd/yyyy";
   private static final DateFormat dateForm = new SimpleDateFormat(DATE_FORMAT,
       Locale.getDefault());
 
   private DateWrap() {
   }
 
+  public static Date parseDate(String date) throws ParseException {
+    return dateForm.parse(date);
+  }
+  
   /**
    * Add the number of days to the date and return the result
    * 
@@ -79,7 +75,7 @@ public class DateWrap {
         Locale.getDefault());
     cal.setTime(date);
     cal.add(Calendar.DATE, numDays);
-    return (cal.get(Calendar.MONTH) + 1) + "/" + cal.get(Calendar.DATE) + "/"
+    return (cal.get(Calendar.MONTH) + 1) + "-" + cal.get(Calendar.DATE) + "-"
         + cal.get(Calendar.YEAR);
   }
 
@@ -179,76 +175,4 @@ public class DateWrap {
 
     return formatter.print(period);
   }
-
-//  public static String getAge(String dateOne, String dateTwo)
-//      throws ParseException {
-//    StringBuilder age = new StringBuilder();
-//
-//    Calendar firstCal = Calendar.getInstance();
-//    firstCal.setTime(dateForm.parse(dateOne));
-//    Calendar secondCal = Calendar.getInstance();
-//    secondCal.setTime(dateForm.parse(dateTwo));
-//
-//    long monthsBetween = monthsBetween(dateOne, dateTwo);
-//    long years = monthsBetween / 12;
-//    long months = monthsBetween - (years * 12);
-//    Log.v(TAG, "years: " + years + " months: " + months);
-//
-//    if (years < 2) {
-//      if (months < 1) {
-//        long days = daysBetween(dateOne, dateTwo);
-//
-//        if (days < 14) {
-//          age.append(days);
-//          age.append(" ");
-//          age.append(STR_DAY);
-//
-//          if (days > 1) {
-//            age.append("s");
-//          }
-//        } else {
-//          long weeks = weeksBetween(dateOne, dateTwo);
-//          age.append(weeks);
-//          age.append(" ");
-//          age.append(STR_WEEK);
-//          age.append("s");
-//        }
-//      } else if (months < 2) {
-//        long weeks = weeksBetween(dateOne, dateTwo);
-//        age.append(weeks);
-//        age.append(" ");
-//        age.append(STR_WEEK);
-//        age.append("s");
-//      } else {
-//        long inMonths = monthsBetween(dateOne, dateTwo);
-//        age.append(inMonths);
-//        age.append(" ");
-//        age.append(STR_MONTH);
-//
-//        if (inMonths > 1) {
-//          age.append("s");
-//        }
-//      }
-//    } else if (years < 10) {
-//      if (months < 4) {
-//        age.append(years);
-//        age.append(" ");
-//        age.append(STR_YEAR);
-//        age.append("s");
-//      } else if (months < 10) {
-//        age.append(years);
-//        age.append(" and a half");
-//      } else {
-//        age.append("Almost ");
-//        age.append(years + 1);
-//      }
-//    } else {
-//      age.append(years);
-//      age.append(" ");
-//      age.append(STR_YEAR);
-//      age.append("s");
-//    }
-//
-//    return age.toString();
-//  }
 }

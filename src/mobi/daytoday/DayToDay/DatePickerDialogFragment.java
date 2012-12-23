@@ -15,7 +15,12 @@
 */
 package mobi.daytoday.DayToDay;
 
+import java.text.ParseException;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.Locale;
+import java.util.TimeZone;
 
 import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
@@ -49,14 +54,33 @@ public class DatePickerDialogFragment extends SherlockDialogFragment {
    * Create and return the date picker dialog
    */
   public Dialog onCreateDialog(Bundle arg) {
-    Calendar now = Calendar.getInstance();
+    String current = getArguments().getString("curDate");
+    Calendar cal;
+    
+    if(current == "") {
+      cal = GregorianCalendar.getInstance(TimeZone.getDefault(),
+          Locale.getDefault());
 
-    Log.v(TAG, "year: " + now.get(Calendar.YEAR) + " month: " + now.get(Calendar.MONTH) + " day: " + now.get(Calendar.DATE));
+      Log.v(TAG, "year: " + cal.get(Calendar.YEAR) + " month: " + cal.get(Calendar.MONTH) + " day: " + cal.get(Calendar.DATE));
 
+    } else {
+      try {
+        Date date = DateWrap.parseDate(current);
+        cal = new GregorianCalendar(TimeZone.getDefault(),
+            Locale.getDefault());
+        cal.setTime(date);
+
+      } catch (ParseException e) {
+        // just ignore it and use now
+        cal = GregorianCalendar.getInstance(TimeZone.getDefault(),
+            Locale.getDefault());
+      }
+    }
+    
     return new DatePickerDialog(getActivity(),
         (OnDateSetListener)frag,
-        now.get(Calendar.YEAR),
-        now.get(Calendar.MONTH),
-        now.get(Calendar.DATE));
+        cal.get(Calendar.YEAR),
+        cal.get(Calendar.MONTH),
+        cal.get(Calendar.DATE));
   }
 }

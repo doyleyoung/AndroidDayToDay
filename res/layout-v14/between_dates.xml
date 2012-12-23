@@ -73,19 +73,15 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:weightSum="1" >
 
         <Button
             android:id="@+id/between_dates_reset_button"
             style="@style/button"
             android:layout_width="wrap_content"
             android:text="@string/reset" />
-
-        <Button
-            android:id="@+id/between_dates_submit_button"
-            style="@style/button"
-            android:layout_width="wrap_content"
-            android:text="@string/submit" />
     </LinearLayout>
 
 </LinearLayout>

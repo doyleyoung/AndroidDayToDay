@@ -23,6 +23,7 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -36,6 +37,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TextView.OnEditorActionListener;
 
 import com.actionbarsherlock.app.SherlockFragment;
 
@@ -62,7 +64,6 @@ public class BetweenDatesFragment extends SherlockFragment implements
   private ImageButton firstDateSelect;
   private ImageButton secondDateSelect;
   private Button resetButton;
-  private Button submitButton;
   private String firstDate;
   private String secondDate;
   private boolean firstActive;
@@ -83,9 +84,12 @@ public class BetweenDatesFragment extends SherlockFragment implements
       }
       ft.addToBackStack(null);
 
+      firstActive = true;
       DialogFragment frag = new DatePickerDialogFragment(
           BetweenDatesFragment.this);
-      firstActive = true;
+      Bundle args = new Bundle();
+      args.putString(DateWrap.CUR_DATE, firstDateInput.getText().toString());
+      frag.setArguments(args);
       frag.show(ft, DatePickerDialogFragment.DATE_PICKER_ID);
     }
   };
@@ -105,9 +109,12 @@ public class BetweenDatesFragment extends SherlockFragment implements
       }
       ft.addToBackStack(null);
 
+      secondActive = true;
       DialogFragment frag = new DatePickerDialogFragment(
           BetweenDatesFragment.this);
-      secondActive = true;
+      Bundle args = new Bundle();
+      args.putString(DateWrap.CUR_DATE, secondDateInput.getText().toString());
+      frag.setArguments(args);
       frag.show(ft, DatePickerDialogFragment.DATE_PICKER_ID);
     }
   };
@@ -121,12 +128,14 @@ public class BetweenDatesFragment extends SherlockFragment implements
         long id) {
       answerType = AnswerInType.values()[(int) id];
       Log.v(TAG, "selected " + id + " type: " + answerType);
+      findBetween();
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
       Log.v(TAG, "nothing selected");
       answerType = AnswerInType.DAYS;
+      findBetween();
     }
   };
 
@@ -141,46 +150,12 @@ public class BetweenDatesFragment extends SherlockFragment implements
     }
   };
 
-  /*
-   * Handles click on the submit button
-   */
-  private OnClickListener submitListener = new OnClickListener() {
-    public void onClick(View v) {
-      try {
-        firstDate = firstDateInput.getText().toString();
-        secondDate = secondDateInput.getText().toString();
-
-        Log.v(TAG, firstDate + " " + secondDate);
-
-        switch (answerType) {
-        case DAYS:
-          answer.setText(
-              String.valueOf(DateWrap.daysBetween(firstDate, secondDate)));
-          break;
-        case WEEKS:
-          answer.setText(
-              String.valueOf(DateWrap.weeksBetween(firstDate, secondDate)));
-          break;
-        case MONTHS:
-          answer.setText(
-              String.valueOf(DateWrap.monthsBetween(firstDate, secondDate)));
-          break;
-        case NATURAL:
-          answer.setText(DateWrap.naturalInterval(firstDate, secondDate));
-          break;
-//        case AGE:
-//          answer.setText(DateWrap.getAge(firstDate, secondDate));
-//          break;
-        }
-
-      } catch (ParseException e) {
-        // XXX need to split this up, killing both is not nice
-        ((AndDayToDayActivity) getActivity())
-            .showAlert(getString(R.string.date_error));
-        firstDateInput.setText("");
-        secondDateInput.setText("");
-      }
-
+  
+  private OnEditorActionListener dateEditListener = new OnEditorActionListener() {
+    @Override
+    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+      findBetween();
+      return false;
     }
   };
 
@@ -204,8 +179,11 @@ public class BetweenDatesFragment extends SherlockFragment implements
     firstDateInput.setFocusable(true);
     firstDateInput.requestFocus();
     firstDateInput.requestFocusFromTouch();
+    firstDateInput.setOnEditorActionListener(dateEditListener);
 
     secondDateInput = (EditText) v.findViewById(R.id.second_date_input);
+    secondDateInput.setOnEditorActionListener(dateEditListener);
+    
     answer = (TextView) v.findViewById(R.id.between_dates_answer);
 
     answerInSpinner = (Spinner) v.findViewById(R.id.answer_in_spinner);
@@ -226,9 +204,6 @@ public class BetweenDatesFragment extends SherlockFragment implements
     resetButton = (Button) v.findViewById(R.id.between_dates_reset_button);
     resetButton.setOnClickListener(resetListener);
 
-    submitButton = (Button) v.findViewById(R.id.between_dates_submit_button);
-    submitButton.setOnClickListener(submitListener);
-
     return v;
   }
 
@@ -239,11 +214,57 @@ public class BetweenDatesFragment extends SherlockFragment implements
   public void onDateSet(DatePicker view, int year, int month, int day) {
     getFragmentManager().popBackStack();
     if (firstActive) {
-      firstActive = false;
-      firstDateInput.setText(month + 1 + "/" + day + "/" + year);
+      firstDateInput.setText(String.format(getString(R.string.date_format), month + 1, day, year));
     } else if (secondActive) {
-      secondActive = false;
-      secondDateInput.setText(month + 1 + "/" + day + "/" + year);
+      secondDateInput.setText(String.format(getString(R.string.date_format), month + 1, day, year));
+    }
+    
+    findBetween();
+    
+    firstActive = false;
+    secondActive = false;
+  }
+
+  private void findBetween() {
+    if(!"".equals(firstDateInput.getText().toString()) &&
+       !"".equals(secondDateInput.getText().toString())) {
+      try {
+        firstDate = firstDateInput.getText().toString();
+        secondDate = secondDateInput.getText().toString();
+
+        Log.v(TAG, firstDate + " " + secondDate);
+
+        switch (answerType) {
+        case DAYS:
+          answer.setText(
+              String.valueOf(DateWrap.daysBetween(firstDate, secondDate)));
+          break;
+        case WEEKS:
+          answer.setText(
+              String.valueOf(DateWrap.weeksBetween(firstDate, secondDate)));
+          break;
+        case MONTHS:
+          answer.setText(
+              String.valueOf(DateWrap.monthsBetween(firstDate, secondDate)));
+          break;
+        case NATURAL:
+          answer.setText(DateWrap.naturalInterval(firstDate, secondDate));
+          break;
+          //      case AGE:
+          //        answer.setText(DateWrap.getAge(firstDate, secondDate));
+          //        break;
+        }
+
+      } catch (ParseException e) {
+        ((AndDayToDayActivity) getActivity()).showAlert(getString(R.string.date_error));
+        if(firstActive) {
+          firstDateInput.setText("");
+        }
+        
+        if(secondActive) {
+          secondDateInput.setText("");
+        }
+      }
     }
   }
 }
