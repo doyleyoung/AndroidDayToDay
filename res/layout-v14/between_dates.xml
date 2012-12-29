@@ -80,7 +80,6 @@
         <Button
             android:id="@+id/between_dates_reset_button"
             style="@style/button"
-            android:layout_width="wrap_content"
             android:text="@string/reset" />
     </LinearLayout>
 

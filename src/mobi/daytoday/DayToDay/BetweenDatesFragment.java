@@ -15,6 +15,8 @@
  */
 package mobi.daytoday.DayToDay;
 
+import static com.nineoldandroids.view.ViewPropertyAnimator.animate;
+
 import java.text.ParseException;
 
 import android.app.DatePickerDialog.OnDateSetListener;
@@ -68,6 +70,7 @@ public class BetweenDatesFragment extends SherlockFragment implements
   private String secondDate;
   private boolean firstActive;
   private boolean secondActive;
+  private Boolean resetVisible;
 
   /*
    * Handles click on the first date select button
@@ -129,6 +132,7 @@ public class BetweenDatesFragment extends SherlockFragment implements
       answerType = AnswerInType.values()[(int) id];
       Log.v(TAG, "selected " + id + " type: " + answerType);
       findBetween();
+      fadeInResetButton();
     }
 
     @Override
@@ -136,6 +140,7 @@ public class BetweenDatesFragment extends SherlockFragment implements
       Log.v(TAG, "nothing selected");
       answerType = AnswerInType.DAYS;
       findBetween();
+      fadeInResetButton();
     }
   };
 
@@ -147,6 +152,9 @@ public class BetweenDatesFragment extends SherlockFragment implements
       firstDateInput.setText("");
       secondDateInput.setText("");
       answer.setText("");
+      
+      animate(resetButton).setDuration(800).alphaBy(0.25f).alpha(1).alpha(0);
+      resetVisible = false;
     }
   };
 
@@ -155,6 +163,7 @@ public class BetweenDatesFragment extends SherlockFragment implements
     @Override
     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
       findBetween();
+      fadeInResetButton();
       return false;
     }
   };
@@ -162,7 +171,7 @@ public class BetweenDatesFragment extends SherlockFragment implements
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-
+    setRetainInstance(true);
     firstActive = false;
     secondActive = false;
   }
@@ -203,6 +212,8 @@ public class BetweenDatesFragment extends SherlockFragment implements
 
     resetButton = (Button) v.findViewById(R.id.between_dates_reset_button);
     resetButton.setOnClickListener(resetListener);
+    resetButton.setVisibility(View.INVISIBLE);
+    resetVisible = false;
 
     return v;
   }
@@ -223,6 +234,14 @@ public class BetweenDatesFragment extends SherlockFragment implements
     
     firstActive = false;
     secondActive = false;
+  }
+  
+  private void fadeInResetButton() {
+    if(!resetVisible) {
+      resetButton.setVisibility(View.VISIBLE);
+      animate(resetButton).setDuration(800).alphaBy(0.25f).alpha(0).alpha(1);
+      resetVisible = true;
+    }
   }
 
   private void findBetween() {
@@ -250,9 +269,6 @@ public class BetweenDatesFragment extends SherlockFragment implements
         case NATURAL:
           answer.setText(DateWrap.naturalInterval(firstDate, secondDate));
           break;
-          //      case AGE:
-          //        answer.setText(DateWrap.getAge(firstDate, secondDate));
-          //        break;
         }
 
       } catch (ParseException e) {

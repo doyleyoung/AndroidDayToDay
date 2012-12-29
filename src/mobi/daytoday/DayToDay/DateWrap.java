@@ -172,7 +172,11 @@ public class DateWrap {
     .appendDays().appendSuffix(" day", " days")
     .printZeroNever()
     .toFormatter();
-
+    
+    if(formatter.print(period).matches(".*-.*")) {
+      return formatter.print(period.negated());
+    }
+    
     return formatter.print(period);
   }
 }

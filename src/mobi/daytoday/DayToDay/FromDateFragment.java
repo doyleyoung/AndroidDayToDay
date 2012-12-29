@@ -37,6 +37,8 @@ import android.widget.TextView.OnEditorActionListener;
 
 import com.actionbarsherlock.app.SherlockFragment;
 
+import static com.nineoldandroids.view.ViewPropertyAnimator.animate;
+
 /**
  * Gather number of days and date and report date that is the result of adding
  * days to date
@@ -53,6 +55,7 @@ public class FromDateFragment extends SherlockFragment implements OnDateSetListe
   private Button resetButton;
   private Integer numDays;
   private String fromDate;
+  private Boolean resetVisible;
   
   private OnClickListener firstDateListener = new OnClickListener() {
     public void onClick(View v) {
@@ -82,13 +85,19 @@ public class FromDateFragment extends SherlockFragment implements OnDateSetListe
     	fromDateText.setText("");
     	numDaysText.setText("");
     	answer.setText("");
+    	
+      animate(resetButton).setDuration(800).alphaBy(0.25f).alpha(1).alpha(0);
+    	resetVisible = false;
     }
   };
   
   private OnEditorActionListener dateEditListener = new OnEditorActionListener() {
     @Override
     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-      calculateDate();
+      if(calculateDate()) {
+        fadeInResetButton();
+      }
+      
       return false;
     }
   };
@@ -96,7 +105,7 @@ public class FromDateFragment extends SherlockFragment implements OnDateSetListe
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    
+    setRetainInstance(true);
     numDays = 0;
     fromDate = "";
   }
@@ -122,18 +131,43 @@ public class FromDateFragment extends SherlockFragment implements OnDateSetListe
     
     resetButton = (Button)v.findViewById(R.id.from_date_reset_button);
     resetButton.setOnClickListener(resetListener);
+    resetButton.setVisibility(View.INVISIBLE);
+    resetVisible = false;
     
     return v;
+  }
+  
+  @Override
+  public void onResume() {
+    super.onResume();
+    
+    if(!"".equals(numDaysText.getText().toString()) &&
+        !"".equals(fromDateText.getText().toString())) {
+      if(calculateDate()) {
+        fadeInResetButton();
+      }
+    }
   }
 
   @Override
   public void onDateSet(DatePicker view, int year, int month, int day) {
     getFragmentManager().popBackStack();
     fromDateText.setText(String.format(getString(R.string.date_format), month + 1, day, year));
-    calculateDate();
+    
+    if(calculateDate()) {
+      fadeInResetButton();
+    }
   }
 
-  private void calculateDate() {
+  private void fadeInResetButton() {
+    if(!resetVisible) {
+      resetButton.setVisibility(View.VISIBLE);
+      animate(resetButton).setDuration(800).alphaBy(0.25f).alpha(0).alpha(1);
+      resetVisible = true;
+    }
+  }
+
+  private Boolean calculateDate() {
     // XXX test month, day and year for sane values java lets them be anything 58/58/2012
 //  String[] date = fromDate.split("/");
 //  Log.v(TAG, "date: " + date[0] + " " + date[1] + " " + date[2]);
@@ -142,20 +176,32 @@ public class FromDateFragment extends SherlockFragment implements OnDateSetListe
 //      Integer.valueOf(date[1]));
     
     try {
-      numDays = Integer.valueOf(numDaysText.getText().toString());
+      
+      if("".equals(numDaysText.getText().toString())) {
+        return true;
+      } else {
+        numDays = Integer.valueOf(numDaysText.getText().toString());
+      }
+      
       fromDate = fromDateText.getText().toString();
       Log.v(TAG, numDays + " " + fromDate);
       
-      answer.setText(DateWrap.addToDate(fromDate, numDays));
+      if(!"".equals(fromDate)) {
+        answer.setText(DateWrap.addToDate(fromDate, numDays));
+      }
+      return true;
+      
     } catch(NumberFormatException e) {
       
       ((AndDayToDayActivity)getActivity()).showAlert(getString(R.string.date_error));
       fromDateText.setText("");
+      return false;
       
     } catch (ParseException e) {
       
       ((AndDayToDayActivity)getActivity()).showAlert(getString(R.string.date_error));
       fromDateText.setText("");
+      return false;
     }
   }
 }
