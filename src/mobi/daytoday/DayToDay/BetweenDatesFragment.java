@@ -131,16 +131,22 @@ public class BetweenDatesFragment extends SherlockFragment implements
         long id) {
       answerType = AnswerInType.values()[(int) id];
       Log.v(TAG, "selected " + id + " type: " + answerType);
-      findBetween();
-      fadeInResetButton();
+      
+      if(hasDates()) {
+        findBetween();
+        fadeInResetButton();
+      }
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
       Log.v(TAG, "nothing selected");
       answerType = AnswerInType.DAYS;
-      findBetween();
-      fadeInResetButton();
+      
+      if(hasDates()) {
+        findBetween();
+        fadeInResetButton();
+      }
     }
   };
 
@@ -231,9 +237,15 @@ public class BetweenDatesFragment extends SherlockFragment implements
     }
     
     findBetween();
+    fadeInResetButton();
     
     firstActive = false;
     secondActive = false;
+  }
+  
+  private boolean hasDates() {
+    return !"".equals(firstDateInput.getText().toString()) &&
+        !"".equals(secondDateInput.getText().toString());
   }
   
   private void fadeInResetButton() {
@@ -245,8 +257,7 @@ public class BetweenDatesFragment extends SherlockFragment implements
   }
 
   private void findBetween() {
-    if(!"".equals(firstDateInput.getText().toString()) &&
-       !"".equals(secondDateInput.getText().toString())) {
+    if(hasDates()) {
       try {
         firstDate = firstDateInput.getText().toString();
         secondDate = secondDateInput.getText().toString();
