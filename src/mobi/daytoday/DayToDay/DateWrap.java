@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012 Doyle Young
+ * Copyright (C) 2012 - 2013 Doyle Young
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -138,10 +138,10 @@ public class DateWrap {
     long months = Math.abs(firstCal.get(Calendar.YEAR)
         - secondCal.get(Calendar.YEAR)) * 12;
     // difference in months
-    months += Math.abs(firstCal.get(Calendar.MONTH)
+    months -= Math.abs(firstCal.get(Calendar.MONTH)
         - secondCal.get(Calendar.MONTH));
 
-    return months;
+    return Math.abs(months);
   }
 
   /**

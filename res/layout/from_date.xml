@@ -51,6 +51,7 @@
 
     <TextView
         android:id="@+id/from_date_answer"
+        android:textIsSelectable="true"
         style="@style/answer" />
 
     <LinearLayout
