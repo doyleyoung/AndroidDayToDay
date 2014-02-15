@@ -19,10 +19,9 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 
-import com.actionbarsherlock.app.SherlockDialogFragment;
-
-public class AlertDialogFragment extends SherlockDialogFragment {
+public class AlertDialogFragment extends DialogFragment {
   private static final String TITLE_KEY = "title";
   
 	public static AlertDialogFragment newInstance(String title) {
@@ -35,7 +34,7 @@ public class AlertDialogFragment extends SherlockDialogFragment {
 	
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
-		return new AlertDialog.Builder(getSherlockActivity())
+		return new AlertDialog.Builder(getActivity())
 		  .setIcon(android.R.drawable.ic_dialog_alert)
 		  .setTitle(getArguments().getString(TITLE_KEY))
 		  .setPositiveButton(getString(android.R.string.ok),

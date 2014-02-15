@@ -25,14 +25,12 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.TabHost;
 
-import com.actionbarsherlock.app.SherlockFragmentActivity;
-
 /**
  * Management activity that handles tabs and their fragment contents
  * @author Doyle Young
  *
  */
-public class AndDayToDayActivity extends SherlockFragmentActivity {
+public class AndDayToDayActivity extends FragmentActivity {
 //  private static final String TAG = "AndDayToDayActivity";
   private static final String LEFT_TAB = "left";
   private static final String RIGHT_TAB = "right";

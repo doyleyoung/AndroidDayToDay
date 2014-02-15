@@ -15,6 +15,8 @@
 */
 package mobi.daytoday.DayToDay;
 
+import static com.nineoldandroids.view.ViewPropertyAnimator.animate;
+
 import java.text.ParseException;
 
 import android.app.DatePickerDialog.OnDateSetListener;
@@ -35,17 +37,13 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
-import com.actionbarsherlock.app.SherlockFragment;
-
-import static com.nineoldandroids.view.ViewPropertyAnimator.animate;
-
 /**
  * Gather number of days and date and report date that is the result of adding
  * days to date
  * @author Doyle Young
  *
  */
-public class FromDateFragment extends SherlockFragment implements OnDateSetListener {
+public class FromDateFragment extends Fragment implements OnDateSetListener {
   private static final String TAG = "FromDateFragment";
 
   private EditText numDaysText;

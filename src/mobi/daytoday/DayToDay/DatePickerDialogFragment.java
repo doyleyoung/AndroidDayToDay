@@ -26,19 +26,18 @@ import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.Dialog;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
 import android.util.Log;
-
-import com.actionbarsherlock.app.SherlockDialogFragment;
-import com.actionbarsherlock.app.SherlockFragment;
 
 /**
  * Date selection and callback dialog fragment
  * @author Doyle Young
  *
  */
-public class DatePickerDialogFragment extends SherlockDialogFragment {
+public class DatePickerDialogFragment extends DialogFragment {
   private static final String TAG = "DatePickerFragment";
-  private SherlockFragment frag;
+  private Fragment frag;
 
   public static final String DATE_PICKER_ID = "datepicker";
 
@@ -46,7 +45,7 @@ public class DatePickerDialogFragment extends SherlockDialogFragment {
    * Constructor
    * @param callback - callback fragment (must implement OnDateSetListener)
    */
-  public DatePickerDialogFragment(SherlockFragment callback) {
+  public DatePickerDialogFragment(Fragment callback) {
     frag = callback;
   }
 
