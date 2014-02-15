@@ -50,5 +50,5 @@ License
 [Joda Time]: http://joda-time.sourceforge.net/
 [NineOldAndroids]: https://github.com/JakeWharton/NineOldAndroids
 [ActionBarSherlock]: https://github.com/JakeWharton/ActionBarSherlock
-[AppBarCompat]: http://android-developers.blogspot.com/2013/08/actionbarcompat-and-io-2013-app-source.html
+[ActionBarCompat]: http://android-developers.blogspot.com/2013/08/actionbarcompat-and-io-2013-app-source.html
 [here]: http://developer.android.com/sdk/index.html
