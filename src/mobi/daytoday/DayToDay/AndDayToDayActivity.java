@@ -15,6 +15,7 @@
 */
 package mobi.daytoday.DayToDay;
 
+import com.crashlytics.android.Crashlytics;
 import java.util.HashMap;
 
 import android.content.Context;
@@ -46,6 +47,7 @@ public class AndDayToDayActivity extends FragmentActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    Crashlytics.start(this);
     setContentView(R.layout.fragment_tabs);
     
     mTabHost = (TabHost)findViewById(android.R.id.tabhost);
