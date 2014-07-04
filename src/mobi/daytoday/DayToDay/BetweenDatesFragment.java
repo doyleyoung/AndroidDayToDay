@@ -92,8 +92,8 @@ public class BetweenDatesFragment extends Fragment implements OnDateSetListener 
       ft.addToBackStack(null);
 
       firstActive = true;
-      DialogFragment frag = new DatePickerDialogFragment(
-          BetweenDatesFragment.this);
+      DialogFragment frag = new DatePickerDialogFragment();
+      ((DatePickerDialogFragment) frag).setCallbackFragment((Fragment)BetweenDatesFragment.this);
       Bundle args = new Bundle();
       args.putString(DateWrap.CUR_DATE, firstDateInput.getText().toString());
       frag.setArguments(args);
@@ -117,8 +117,8 @@ public class BetweenDatesFragment extends Fragment implements OnDateSetListener 
       ft.addToBackStack(null);
 
       secondActive = true;
-      DialogFragment frag = new DatePickerDialogFragment(
-          BetweenDatesFragment.this);
+      DialogFragment frag = new DatePickerDialogFragment();
+      ((DatePickerDialogFragment) frag).setCallbackFragment((Fragment)BetweenDatesFragment.this);
       Bundle args = new Bundle();
       args.putString(DateWrap.CUR_DATE, secondDateInput.getText().toString());
       frag.setArguments(args);

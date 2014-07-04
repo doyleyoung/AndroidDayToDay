@@ -72,7 +72,8 @@ public class FromDateFragment extends Fragment implements OnDateSetListener {
       }
       ft.addToBackStack(null);
       
-      DialogFragment frag = new DatePickerDialogFragment(FromDateFragment.this);
+      DialogFragment frag = new DatePickerDialogFragment();
+      ((DatePickerDialogFragment) frag).setCallbackFragment((Fragment)FromDateFragment.this);
       Bundle args = new Bundle();
       args.putString(DateWrap.CUR_DATE, fromDateText.getText().toString());
       frag.setArguments(args);

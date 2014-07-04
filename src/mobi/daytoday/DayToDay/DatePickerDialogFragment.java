@@ -49,13 +49,13 @@ public class DatePickerDialogFragment extends DialogFragment {
   }
   
   /**
-   * Constructor
-   * @param callback - callback fragment (must implement OnDateSetListener)
-   */
-  public DatePickerDialogFragment(Fragment callback) {
+   * Set the fragment that will handle the OnDateSetListener callback
+   * @param callback - callback fragment
+   */  
+  public void setCallbackFragment(Fragment callback) {
     frag = callback;
   }
-
+  
   /**
    * Create and return the date picker dialog
    */
