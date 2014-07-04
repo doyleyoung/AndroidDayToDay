@@ -1,5 +1,5 @@
 /*
-* Copyright (C) 2012 - 2013 Doyle Young
+* Copyright (C) 2012 - 2014 Doyle Young
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
@@ -54,6 +54,13 @@ public class FromDateFragment extends Fragment implements OnDateSetListener {
   private Integer numDays;
   private String fromDate;
   private Boolean resetVisible;
+  
+  /**
+   * Constructor - Fragment requires public empty constructor
+   */
+  public FromDateFragment() {
+    // nothing to see here
+  }
   
   private OnClickListener firstDateListener = new OnClickListener() {
     public void onClick(View v) {

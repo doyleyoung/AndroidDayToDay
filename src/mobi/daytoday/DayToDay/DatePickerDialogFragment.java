@@ -1,5 +1,5 @@
 /*
-* Copyright (C) 2012 - 2013 Doyle Young
+* Copyright (C) 2012 - 2014 Doyle Young
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
@@ -41,6 +41,13 @@ public class DatePickerDialogFragment extends DialogFragment {
 
   public static final String DATE_PICKER_ID = "datepicker";
 
+  /**
+   * Constructor - Fragment requires public empty constructor
+   */
+  public DatePickerDialogFragment() {
+    // nothing to see here
+  }
+  
   /**
    * Constructor
    * @param callback - callback fragment (must implement OnDateSetListener)
