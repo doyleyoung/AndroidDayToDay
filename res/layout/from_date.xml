@@ -20,7 +20,8 @@
             style="@style/input"
             android:layout_weight="1"
             android:digits="-0123456789"
-            android:inputType="number|numberSigned" >
+            android:inputType="number|numberSigned"
+            android:singleLine="true" >
 
             <requestFocus />
         </EditText>

@@ -18,7 +18,8 @@
             android:id="@+id/num_days_input"
             style="@style/input_land"
             android:digits="-0123456789"
-            android:inputType="number|numberSigned" >
+            android:inputType="number|numberSigned"
+            android:singleLine="true" >
 
             <requestFocus />
         </EditText>
