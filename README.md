@@ -19,13 +19,13 @@ ActionBarSherlock is no longer supported.
 Usage
 -----
 
-This repo contains an importable Eclipse Android project.  Instructions to set
-up Eclipse Android development are available [here].  You need to include
-[AppBarCompat] and [NineOldAndroids] as library dependencies.  You will also
-need to include [Joda Time] as a dependency.  Finally, if you want to enable
-crash reporting you will need to sign up for [Crashlytics]. Once you have
-imported the project and included the libraries, a Project -> Clean is usually
-all that is necessary. If you have any further questions, please let me know.
+This repo contains an importable Eclipse Android project.  You will need
+[Eclipse Android development tools], then include [ActionBarCompat] and
+[NineOldAndroids] as library dependencies, and include [Joda Time] as a dependency.
+Finally, if you want to enable crash reporting, you will need to sign up for
+[Crashlytics]. Once you have imported the project and included the libraries,
+a Project -> Clean is usually all that is necessary. If you have any further
+questions, please let me know.
 
 Developed by
 ============
@@ -53,4 +53,4 @@ License
 [ActionBarSherlock]: https://github.com/JakeWharton/ActionBarSherlock
 [ActionBarCompat]: http://android-developers.blogspot.com/2013/08/actionbarcompat-and-io-2013-app-source.html
 [Crashlytics]: http://try.crashlytics.com/ 
-[here]: http://developer.android.com/sdk/index.html
+[Eclipse Android development tools]: http://developer.android.com/sdk/index.html
