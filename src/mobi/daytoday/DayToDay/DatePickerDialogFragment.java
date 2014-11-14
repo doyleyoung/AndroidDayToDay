@@ -22,6 +22,8 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import org.joda.time.DateTime;
+
 import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.Dialog;
@@ -61,32 +63,26 @@ public class DatePickerDialogFragment extends DialogFragment {
    */
   public Dialog onCreateDialog(Bundle arg) {
     String current = getArguments().getString("curDate");
-    Calendar cal;
+    DateTime dt;
     
-    if(current == "") {
-      cal = GregorianCalendar.getInstance(TimeZone.getDefault(),
-          Locale.getDefault());
-
-      Log.v(TAG, "year: " + cal.get(Calendar.YEAR) + " month: " + cal.get(Calendar.MONTH) + " day: " + cal.get(Calendar.DATE));
+    if("".equals(current)) {
+      dt = new DateTime();
+      
+      Log.v(TAG, "year: " + dt.getYear() + " month: " + dt.getMonthOfYear() + " day: " + dt.getDayOfMonth());
 
     } else {
       try {
-        Date date = DateWrap.parseDate(current);
-        cal = new GregorianCalendar(TimeZone.getDefault(),
-            Locale.getDefault());
-        cal.setTime(date);
-
-      } catch (ParseException e) {
+        dt = DateWrap.parseDate(current);
+      } catch (Exception e) {
         // just ignore it and use now
-        cal = GregorianCalendar.getInstance(TimeZone.getDefault(),
-            Locale.getDefault());
+        dt = new DateTime();
       }
     }
     
     return new DatePickerDialog(getActivity(),
         (OnDateSetListener)frag,
-        cal.get(Calendar.YEAR),
-        cal.get(Calendar.MONTH),
-        cal.get(Calendar.DATE));
+        dt.getYear(),
+        dt.getMonthOfYear()-1,
+        dt.getDayOfMonth());
   }
 }

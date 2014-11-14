@@ -16,9 +16,6 @@
 package mobi.daytoday.DayToDay;
 
 import static com.nineoldandroids.view.ViewPropertyAnimator.animate;
-
-import java.text.ParseException;
-
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -27,8 +24,11 @@ import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnFocusChangeListener;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -75,29 +75,14 @@ public class BetweenDatesFragment extends Fragment implements OnDateSetListener 
   public BetweenDatesFragment() {
     // nothing to see here
   }
-  
+
   /*
    * Handles click on the first date select button
    */
   private OnClickListener firstDateListener = new OnClickListener() {
     public void onClick(View v) {
-      FragmentTransaction ft = getFragmentManager().beginTransaction();
-
-      Fragment prev = getFragmentManager().findFragmentByTag(
-          DatePickerDialogFragment.DATE_PICKER_ID);
-      if (prev != null) {
-        ft.remove(prev);
-        firstActive = secondActive = false;
-      }
-      ft.addToBackStack(null);
-
       firstActive = true;
-      DialogFragment frag = new DatePickerDialogFragment();
-      ((DatePickerDialogFragment) frag).setCallbackFragment((Fragment)BetweenDatesFragment.this);
-      Bundle args = new Bundle();
-      args.putString(DateWrap.CUR_DATE, firstDateInput.getText().toString());
-      frag.setArguments(args);
-      frag.show(ft, DatePickerDialogFragment.DATE_PICKER_ID);
+      showDatePickerDialogWith(firstDateInput.getText().toString());
     }
   };
 
@@ -106,23 +91,8 @@ public class BetweenDatesFragment extends Fragment implements OnDateSetListener 
    */
   private OnClickListener secondDateListener = new OnClickListener() {
     public void onClick(View v) {
-      FragmentTransaction ft = getFragmentManager().beginTransaction();
-
-      Fragment prev = getFragmentManager().findFragmentByTag(
-          DatePickerDialogFragment.DATE_PICKER_ID);
-      if (prev != null) {
-        ft.remove(prev);
-        firstActive = secondActive = false;
-      }
-      ft.addToBackStack(null);
-
       secondActive = true;
-      DialogFragment frag = new DatePickerDialogFragment();
-      ((DatePickerDialogFragment) frag).setCallbackFragment((Fragment)BetweenDatesFragment.this);
-      Bundle args = new Bundle();
-      args.putString(DateWrap.CUR_DATE, secondDateInput.getText().toString());
-      frag.setArguments(args);
-      frag.show(ft, DatePickerDialogFragment.DATE_PICKER_ID);
+      showDatePickerDialogWith(secondDateInput.getText().toString());
     }
   };
 
@@ -136,10 +106,7 @@ public class BetweenDatesFragment extends Fragment implements OnDateSetListener 
       answerType = AnswerInType.values()[(int) id];
       Log.v(TAG, "selected " + id + " type: " + answerType);
 
-      if (hasDates()) {
-        findBetween();
-        fadeInResetButton();
-      }
+      calculateIfPossible();
     }
 
     @Override
@@ -147,10 +114,7 @@ public class BetweenDatesFragment extends Fragment implements OnDateSetListener 
       Log.v(TAG, "nothing selected");
       answerType = AnswerInType.DAYS;
 
-      if (hasDates()) {
-        findBetween();
-        fadeInResetButton();
-      }
+      calculateIfPossible();
     }
   };
 
@@ -168,12 +132,37 @@ public class BetweenDatesFragment extends Fragment implements OnDateSetListener 
     }
   };
 
+  /*
+   * Handles Enter key or Alt finished key press
+   */
   private OnEditorActionListener dateEditListener = new OnEditorActionListener() {
     @Override
     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-      findBetween();
-      fadeInResetButton();
+      calculateIfPossible();
       return false;
+    }
+  };
+
+  /*
+   * Keeps focus on EditText and off tab when using physical keyboard
+   */
+  private OnTouchListener handlePhysicalKeyboardListener = new OnTouchListener() {
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+      v.requestFocusFromTouch();
+      return false;
+    }
+  };
+
+  /*
+   * Handles EditText losing focus for any reason
+   */
+  private OnFocusChangeListener editTextLosesFocusListener = new OnFocusChangeListener() {
+    @Override
+    public void onFocusChange(View v, boolean hasFocus) {
+      if (!hasFocus) {
+        calculateIfPossible();
+      }
     }
   };
 
@@ -198,9 +187,13 @@ public class BetweenDatesFragment extends Fragment implements OnDateSetListener 
     firstDateInput.requestFocus();
     firstDateInput.requestFocusFromTouch();
     firstDateInput.setOnEditorActionListener(dateEditListener);
+    firstDateInput.setOnTouchListener(handlePhysicalKeyboardListener);
+    firstDateInput.setOnFocusChangeListener(editTextLosesFocusListener);
 
     secondDateInput = (EditText) v.findViewById(R.id.second_date_input);
     secondDateInput.setOnEditorActionListener(dateEditListener);
+    secondDateInput.setOnTouchListener(handlePhysicalKeyboardListener);
+    secondDateInput.setOnFocusChangeListener(editTextLosesFocusListener);
 
     answer = (TextView) v.findViewById(R.id.between_dates_answer);
 
@@ -248,9 +241,43 @@ public class BetweenDatesFragment extends Fragment implements OnDateSetListener 
     secondActive = false;
   }
 
+  private void showDatePickerDialogWith(String date) {
+    FragmentTransaction ft = getFragmentManager().beginTransaction();
+
+    Fragment prev = getFragmentManager().findFragmentByTag(
+        DatePickerDialogFragment.DATE_PICKER_ID);
+    if (prev != null) {
+      ft.remove(prev);
+      firstActive = secondActive = false;
+    }
+    ft.addToBackStack(null);
+
+    DialogFragment frag = new DatePickerDialogFragment();
+    ((DatePickerDialogFragment) frag)
+        .setCallbackFragment((Fragment) BetweenDatesFragment.this);
+    Bundle args = new Bundle();
+    args.putString(DateWrap.CUR_DATE, date);
+    frag.setArguments(args);
+    frag.show(ft, DatePickerDialogFragment.DATE_PICKER_ID);
+  }
+
+  private void calculateIfPossible() {
+    if (hasDates()) {
+      findBetween();
+      fadeInResetButton();
+    }
+  }
+
   private boolean hasDates() {
-    return !"".equals(firstDateInput.getText().toString())
-        && !"".equals(secondDateInput.getText().toString());
+    return firstDateIsSet() && secondDateIsSet();
+  }
+
+  private boolean firstDateIsSet() {
+    return !"".equals(firstDateInput.getText().toString());
+  }
+
+  private boolean secondDateIsSet() {
+    return !"".equals(secondDateInput.getText().toString());
   }
 
   private void fadeInResetButton() {
@@ -287,14 +314,13 @@ public class BetweenDatesFragment extends Fragment implements OnDateSetListener 
           break;
         }
 
-      } catch (ParseException e) {
+      } catch (Exception e) {
         ((AndDayToDayActivity) getActivity())
             .showAlert(getString(R.string.date_error));
-        if (firstActive) {
+        if (firstDateIsSet()) {
           firstDateInput.setText("");
         }
-
-        if (secondActive) {
+        if (secondDateIsSet()) {
           secondDateInput.setText("");
         }
       }

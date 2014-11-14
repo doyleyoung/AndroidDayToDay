@@ -16,9 +16,6 @@
 package mobi.daytoday.DayToDay;
 
 import static com.nineoldandroids.view.ViewPropertyAnimator.animate;
-
-import java.text.ParseException;
-
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -27,8 +24,11 @@ import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnFocusChangeListener;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -62,6 +62,9 @@ public class FromDateFragment extends Fragment implements OnDateSetListener {
     // nothing to see here
   }
   
+  /*
+   * Handles click on date selector button
+   */
   private OnClickListener firstDateListener = new OnClickListener() {
     public void onClick(View v) {
       FragmentTransaction ft = getFragmentManager().beginTransaction();
@@ -97,14 +100,38 @@ public class FromDateFragment extends Fragment implements OnDateSetListener {
     }
   };
   
+  /*
+   * Handles Enter key or Alt finished key press
+   */
   private OnEditorActionListener dateEditListener = new OnEditorActionListener() {
     @Override
     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-      if(calculateDate()) {
-        fadeInResetButton();
-      }
+      calculateAndAddResetButton();
       
       return false;
+    }
+  };
+  
+  /*
+   * Keeps focus on EditText and off tab when using physical keyboard
+   */
+  private OnTouchListener handlePhysicalKeyboardListener = new OnTouchListener() {
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+      v.requestFocusFromTouch();
+      return false;
+    }
+  };
+  
+  /*
+   * Handles EditText losing focus for any reason
+   */
+  private OnFocusChangeListener editTextLosesFocusListener = new OnFocusChangeListener() {
+    @Override
+    public void onFocusChange(View v, boolean hasFocus) {
+      if(!hasFocus) {
+        calculateIfPossible();
+      }
     }
   };
 
@@ -126,9 +153,13 @@ public class FromDateFragment extends Fragment implements OnDateSetListener {
     numDaysText.requestFocus();
     numDaysText.requestFocusFromTouch();
     numDaysText.setOnEditorActionListener(dateEditListener);
+    numDaysText.setOnTouchListener(handlePhysicalKeyboardListener);
+    numDaysText.setOnFocusChangeListener(editTextLosesFocusListener);
     
     fromDateText = (EditText)v.findViewById(R.id.from_date_input);
     fromDateText.setOnEditorActionListener(dateEditListener);
+    fromDateText.setOnTouchListener(handlePhysicalKeyboardListener);
+    fromDateText.setOnFocusChangeListener(editTextLosesFocusListener);
     
     answer = (TextView)v.findViewById(R.id.from_date_answer);
     
@@ -147,12 +178,7 @@ public class FromDateFragment extends Fragment implements OnDateSetListener {
   public void onResume() {
     super.onResume();
     
-    if(!"".equals(numDaysText.getText().toString()) &&
-        !"".equals(fromDateText.getText().toString())) {
-      if(calculateDate()) {
-        fadeInResetButton();
-      }
-    }
+    calculateIfPossible();
   }
 
   @Override
@@ -160,6 +186,17 @@ public class FromDateFragment extends Fragment implements OnDateSetListener {
     getFragmentManager().popBackStack();
     fromDateText.setText(String.format(getString(R.string.date_format), month + 1, day, year));
     
+    calculateAndAddResetButton();
+  }
+  
+  private void calculateIfPossible() {
+    if(!"".equals(numDaysText.getText().toString()) &&
+        !"".equals(fromDateText.getText().toString())) {
+      calculateAndAddResetButton();
+    }
+  }
+
+  private void calculateAndAddResetButton() {
     if(calculateDate()) {
       fadeInResetButton();
     }
@@ -173,14 +210,7 @@ public class FromDateFragment extends Fragment implements OnDateSetListener {
     }
   }
 
-  private Boolean calculateDate() {
-    // XXX test month, day and year for sane values java lets them be anything 58/58/2012
-//  String[] date = fromDate.split("/");
-//  Log.v(TAG, "date: " + date[0] + " " + date[1] + " " + date[2]);
-//  GregorianCalendar cal = new GregorianCalendar(Integer.valueOf(date[2]),
-//      Integer.valueOf(date[0]),
-//      Integer.valueOf(date[1]));
-    
+  private Boolean calculateDate() {    
     try {
       
       if("".equals(numDaysText.getText().toString())) {
@@ -197,17 +227,12 @@ public class FromDateFragment extends Fragment implements OnDateSetListener {
       }
       return true;
       
-    } catch(NumberFormatException e) {
+    } catch(Exception e) {
       
       ((AndDayToDayActivity)getActivity()).showAlert(getString(R.string.date_error));
       fromDateText.setText("");
       return false;
       
-    } catch (ParseException e) {
-      
-      ((AndDayToDayActivity)getActivity()).showAlert(getString(R.string.date_error));
-      fromDateText.setText("");
-      return false;
     }
   }
 }
