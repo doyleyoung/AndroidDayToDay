@@ -17,3 +17,6 @@ local.properties
 proguard/
 # Log Files
 *.log
+# Other
+res/values/com_crashlytics_export_strings.xml
+assets

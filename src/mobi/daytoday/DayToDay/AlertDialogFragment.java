@@ -1,5 +1,5 @@
 /*
-* Copyright (C) 2012 - 2013 Doyle Young
+* Copyright (C) 2012 - 2014 Doyle Young
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
@@ -23,6 +23,13 @@ import android.support.v4.app.DialogFragment;
 
 public class AlertDialogFragment extends DialogFragment {
   private static final String TITLE_KEY = "title";
+  
+  /**
+   * Constructor - Fragment requires public empty constructor
+   */
+  public AlertDialogFragment() {
+    // nothing to see here
+  }
   
 	public static AlertDialogFragment newInstance(String title) {
 		AlertDialogFragment alert = new AlertDialogFragment();

@@ -1,5 +1,5 @@
 /*
-* Copyright (C) 2012 - 2013 Doyle Young
+* Copyright (C) 2012 - 2014 Doyle Young
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
@@ -55,6 +55,13 @@ public class FromDateFragment extends Fragment implements OnDateSetListener {
   private String fromDate;
   private Boolean resetVisible;
   
+  /**
+   * Constructor - Fragment requires public empty constructor
+   */
+  public FromDateFragment() {
+    // nothing to see here
+  }
+  
   private OnClickListener firstDateListener = new OnClickListener() {
     public void onClick(View v) {
       FragmentTransaction ft = getFragmentManager().beginTransaction();
@@ -65,7 +72,8 @@ public class FromDateFragment extends Fragment implements OnDateSetListener {
       }
       ft.addToBackStack(null);
       
-      DialogFragment frag = new DatePickerDialogFragment(FromDateFragment.this);
+      DialogFragment frag = new DatePickerDialogFragment();
+      ((DatePickerDialogFragment) frag).setCallbackFragment((Fragment)FromDateFragment.this);
       Bundle args = new Bundle();
       args.putString(DateWrap.CUR_DATE, fromDateText.getText().toString());
       frag.setArguments(args);

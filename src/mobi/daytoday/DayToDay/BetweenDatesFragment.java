@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012 - 2013 Doyle Young
+ * Copyright (C) 2012 - 2014 Doyle Young
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -69,6 +69,13 @@ public class BetweenDatesFragment extends Fragment implements OnDateSetListener 
   private boolean secondActive;
   private Boolean resetVisible;
 
+  /**
+   * Constructor - Fragment requires public empty constructor
+   */
+  public BetweenDatesFragment() {
+    // nothing to see here
+  }
+  
   /*
    * Handles click on the first date select button
    */
@@ -85,8 +92,8 @@ public class BetweenDatesFragment extends Fragment implements OnDateSetListener 
       ft.addToBackStack(null);
 
       firstActive = true;
-      DialogFragment frag = new DatePickerDialogFragment(
-          BetweenDatesFragment.this);
+      DialogFragment frag = new DatePickerDialogFragment();
+      ((DatePickerDialogFragment) frag).setCallbackFragment((Fragment)BetweenDatesFragment.this);
       Bundle args = new Bundle();
       args.putString(DateWrap.CUR_DATE, firstDateInput.getText().toString());
       frag.setArguments(args);
@@ -110,8 +117,8 @@ public class BetweenDatesFragment extends Fragment implements OnDateSetListener 
       ft.addToBackStack(null);
 
       secondActive = true;
-      DialogFragment frag = new DatePickerDialogFragment(
-          BetweenDatesFragment.this);
+      DialogFragment frag = new DatePickerDialogFragment();
+      ((DatePickerDialogFragment) frag).setCallbackFragment((Fragment)BetweenDatesFragment.this);
       Bundle args = new Bundle();
       args.putString(DateWrap.CUR_DATE, secondDateInput.getText().toString());
       frag.setArguments(args);
