@@ -317,12 +317,9 @@ public class BetweenDatesFragment extends Fragment implements OnDateSetListener 
       } catch (Exception e) {
         ((AndDayToDayActivity) getActivity())
             .showAlert(getString(R.string.date_error));
-        if (firstDateIsSet()) {
-          firstDateInput.setText("");
-        }
-        if (secondDateIsSet()) {
-          secondDateInput.setText("");
-        }
+        firstDateInput.setText("");
+        secondDateInput.setText("");
+        answer.setText("");
       }
     }
   }

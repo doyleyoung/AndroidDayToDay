@@ -231,6 +231,7 @@ public class FromDateFragment extends Fragment implements OnDateSetListener {
       
       ((AndDayToDayActivity)getActivity()).showAlert(getString(R.string.date_error));
       fromDateText.setText("");
+      answer.setText("");
       return false;
       
     }
