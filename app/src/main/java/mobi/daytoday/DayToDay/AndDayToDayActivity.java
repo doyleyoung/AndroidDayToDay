@@ -15,16 +15,15 @@
 */
 package mobi.daytoday.DayToDay;
 
-import com.crashlytics.android.Crashlytics;
-import java.util.HashMap;
-
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentTransaction;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentTransaction;
 import android.view.View;
 import android.widget.TabHost;
+
+import java.util.HashMap;
 
 /**
  * Management activity that handles tabs and their fragment contents
@@ -47,7 +46,6 @@ public class AndDayToDayActivity extends FragmentActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    Crashlytics.start(this);
     setContentView(R.layout.fragment_tabs);
     
     mTabHost = (TabHost)findViewById(android.R.id.tabhost);
@@ -92,7 +90,7 @@ public class AndDayToDayActivity extends FragmentActivity {
     private final FragmentActivity mActivity;
     private final TabHost mTabHost;
     private final int mContainerId;
-    private final HashMap<String, TabInfo> mTabs = new HashMap<String, TabInfo>();
+    private final HashMap<String, TabInfo> mTabs = new HashMap<>();
     TabInfo mLastTab;
 
     static final class TabInfo {

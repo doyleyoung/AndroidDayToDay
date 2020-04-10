@@ -1,13 +1,16 @@
+buildscript {
+}
 apply plugin: 'com.android.application'
 
+
 android {
-    compileSdkVersion 21
-    buildToolsVersion "21.1.1"
+    compileSdkVersion 29
+//    buildToolsVersion "21.1.2"
 
     defaultConfig {
         applicationId "mobi.daytoday.DayToDay"
-        minSdkVersion 7
-        targetSdkVersion 21
+        minSdkVersion 14
+        targetSdkVersion 29
 
         testApplicationId "mobi.daytoday.DayToDay.test"
         testInstrumentationRunner "android.test.InstrumentationTestRunner"
@@ -19,12 +22,17 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
+    buildToolsVersion = '29.0.3'
 }
 
 dependencies {
-    compile 'com.android.support:support-v4:21.0.0'
-    compile 'joda-time:joda-time:2.5'
-    compile 'com.android.support:appcompat-v7:21.0.0'
-    compile files('libs/crashlytics.jar')
-    compile files('libs/nineoldandroids-2.4.0.jar')
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'joda-time:joda-time:2.5'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation files('libs/nineoldandroids-2.4.0.jar')
+    androidTestImplementation 'junit:junit:4.12'
 }

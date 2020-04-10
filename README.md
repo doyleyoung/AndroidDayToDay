@@ -16,17 +16,6 @@ created the app using [ActionBarSherlock] so it would be available across the
 widest range of devices. It has now been converted to [ActionBarCompat] since
 ActionBarSherlock is no longer supported.
 
-Usage
------
-
-This repo contains an importable Eclipse Android project.  You will need
-[Eclipse Android development tools], then include [ActionBarCompat] and
-[NineOldAndroids] as library dependencies, and include [Joda Time] as a dependency.
-Finally, if you want to enable crash reporting, you will need to sign up for
-[Crashlytics]. Once you have imported the project and included the libraries,
-a Project -> Clean is usually all that is necessary. If you have any further
-questions, please let me know.
-
 Developed by
 ============
 * Doyle Young - dyoung@gmail.com
@@ -34,7 +23,7 @@ Developed by
 License
 =======
 
-    Copyright 2012 - 2014 Doyle Young
+    Copyright 2012 - 2020 Doyle Young
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -47,10 +36,3 @@ License
     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
     See the License for the specific language governing permissions and
     limitations under the License.
-
-[Joda Time]: http://joda-time.sourceforge.net/
-[NineOldAndroids]: https://github.com/JakeWharton/NineOldAndroids
-[ActionBarSherlock]: https://github.com/JakeWharton/ActionBarSherlock
-[ActionBarCompat]: http://android-developers.blogspot.com/2013/08/actionbarcompat-and-io-2013-app-source.html
-[Crashlytics]: http://try.crashlytics.com/ 
-[Eclipse Android development tools]: http://developer.android.com/sdk/index.html
