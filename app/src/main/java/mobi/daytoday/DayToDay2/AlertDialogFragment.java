@@ -1,5 +1,5 @@
 /*
-* Copyright (C) 2012 - 2014 Doyle Young
+* Copyright (C) 2012 - 2022 Doyle Young
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
@@ -13,12 +13,13 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
-package mobi.daytoday.DayToDay;
+package mobi.daytoday.DayToDay2;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+
 import androidx.fragment.app.DialogFragment;
 
 public class AlertDialogFragment extends DialogFragment {

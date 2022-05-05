@@ -4,29 +4,27 @@ apply plugin: 'com.android.application'
 
 
 android {
-    compileSdkVersion 29
-//    buildToolsVersion "21.1.2"
+    compileSdkVersion 32
 
     defaultConfig {
-        applicationId "mobi.daytoday.DayToDay"
+        applicationId "mobi.daytoday.DayToDay2"
         minSdkVersion 14
-        targetSdkVersion 29
+        targetSdkVersion 32
 
-        testApplicationId "mobi.daytoday.DayToDay.test"
+        testApplicationId "mobi.daytoday.DayToDay2.test"
         testInstrumentationRunner "android.test.InstrumentationTestRunner"
+        signingConfig signingConfigs.debug
     }
 
     buildTypes {
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+            minifyEnabled true
         }
     }
     compileOptions {
         sourceCompatibility = 1.8
         targetCompatibility = 1.8
     }
-    buildToolsVersion = '29.0.3'
 }
 
 dependencies {

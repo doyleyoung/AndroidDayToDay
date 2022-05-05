@@ -1,4 +1,4 @@
-package mobi.daytoday.DayToDay;
+package mobi.daytoday.DayToDay2;
 
 import junit.framework.TestCase;
 

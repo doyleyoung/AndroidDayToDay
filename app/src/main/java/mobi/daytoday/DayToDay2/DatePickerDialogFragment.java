@@ -1,5 +1,5 @@
 /*
-* Copyright (C) 2012 - 2014 Doyle Young
+* Copyright (C) 2012 - 2022 Doyle Young
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
@@ -13,15 +13,16 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
-package mobi.daytoday.DayToDay;
+package mobi.daytoday.DayToDay2;
 
 import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.Dialog;
 import android.os.Bundle;
+import android.util.Log;
+
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
-import android.util.Log;
 
 import org.joda.time.DateTime;
 

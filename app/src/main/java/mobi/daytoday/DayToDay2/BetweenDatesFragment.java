@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012 - 2014 Doyle Young
+ * Copyright (C) 2012 - 2022 Doyle Young
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,15 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package mobi.daytoday.DayToDay;
+package mobi.daytoday.DayToDay2;
+
+import static com.nineoldandroids.view.ViewPropertyAnimator.animate;
 
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.os.Bundle;
-
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -45,7 +42,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
-import static com.nineoldandroids.view.ViewPropertyAnimator.animate;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 /**
  * Gather two dates and the form of the response and report the time between the

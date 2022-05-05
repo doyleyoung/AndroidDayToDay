@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">DayToDay</string>
+    <string name="app_name">DayToDay2</string>
     <string name="from_date_title">From Date</string>
     <string name="between_dates_title">Between Dates</string>
     <string name="reset">Reset</string>

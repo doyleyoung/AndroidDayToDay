@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012 - 2014 Doyle Young
+ * Copyright (C) 2012 - 2022 Doyle Young
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package mobi.daytoday.DayToDay;
+package mobi.daytoday.DayToDay2;
+
+import static org.joda.time.Duration.standardDays;
 
 import org.joda.time.DateTime;
 import org.joda.time.Duration;
@@ -25,8 +27,6 @@ import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.DateTimeFormatterBuilder;
 import org.joda.time.format.PeriodFormatter;
 import org.joda.time.format.PeriodFormatterBuilder;
-
-import static org.joda.time.Duration.standardDays;
 
 /**
  * Date math functions

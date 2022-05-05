@@ -13,15 +13,16 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
-package mobi.daytoday.DayToDay;
+package mobi.daytoday.DayToDay2;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.TabHost;
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
-import android.view.View;
-import android.widget.TabHost;
 
 import java.util.HashMap;
 

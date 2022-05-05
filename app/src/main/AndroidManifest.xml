@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="mobi.daytoday.DayToDay"
+    package="mobi.daytoday.DayToDay2"
     android:versionCode="112"
     android:versionName="1.12" >
 
@@ -9,14 +9,13 @@
     <application
         android:icon="@drawable/icon"
         android:label="@string/app_name"
-        android:theme="@style/Base.V21.Theme.AppCompat"
-        android:allowBackup="false" >
+        android:theme="@style/Base.V21.Theme.AppCompat" >
         <activity
             android:name=".AndDayToDayActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
